@@ -1,0 +1,30 @@
+USE master;
+GO
+
+-- 1. Supprimer complètement la base si elle existe
+IF DB_ID('Datawarehouse') IS NOT NULL
+BEGIN
+    ALTER DATABASE Datawarehouse
+    SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+
+    DROP DATABASE Datawarehouse;
+END;
+GO
+
+-- 2. Recréer la base vide
+CREATE DATABASE Datawarehouse;
+GO
+
+-- 3. Sélectionner la nouvelle base
+USE Datawarehouse;
+GO
+
+-- 4. Créer les schémas
+CREATE SCHEMA bronze;
+GO
+
+CREATE SCHEMA Silver;
+GO
+
+CREATE SCHEMA Gold;
+GO
